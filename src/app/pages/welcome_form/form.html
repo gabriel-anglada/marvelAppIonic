@@ -1,0 +1,61 @@
+<ion-content padding>
+
+  <ion-slides>
+    <ion-slide>
+      <form [formGroup]="form.controls['step0']">
+        <ion-item>
+          <ion-label>What's your name?</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+      </form>
+    </ion-slide>
+
+    <ion-slide>
+      <form [formGroup]="form.controls['step1']">
+        <ion-item>
+          <ion-label>How old are you?</ion-label>
+          <ion-input type="number" formControlName="age"></ion-input>
+        </ion-item>
+      </form>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-list>
+        <h1>Revisa tus datos</h1>
+
+        <ion-item>
+          <ion-icon name="person"></ion-icon>
+          <h2>Name</h2>
+          <p>{{ form.controls['step0'].controls['name'].value }}</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="calendar"></ion-icon>
+          <h2>Age</h2>
+          <p>{{ form.controls['step1'].controls['age'].value }}</p>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="onBackClick()" *ngIf="!slides.isBeginning()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons right>
+      <button ion-button icon-only (click)="onForwardClick()" *ngIf="!slides.isEnd()"
+              [disabled]="form.controls['step' + (slides.getActiveIndex() || 0)].invalid">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+      <button ion-button (click)="onSubmitClick()" *ngIf="slides.isEnd()"
+              [disabled]="form.invalid">
+        Send
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

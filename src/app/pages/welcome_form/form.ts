@@ -39,8 +39,7 @@ export class FormPage {
             age: this.form.value['step1']['age']
         };
         this.dataService.saveData(data)
-            .then(result => {
-                console.log(result);
+            .then((result: any) => {
                 this.alertService.show(`Tus datos se han guardado satisfactoriamente: Nombre ${result.name}, Edad: ${result.age}`, '¡Genial!')
             }, error => {
                 this.alertService.show(error.message, 'Error');

@@ -14,7 +14,7 @@ export class HttpService {
     post(url: string, body: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.http
-                .post(url, body, this._headers)
+                .post(url, body, {headers: this._headers})
                 .toPromise()
                 .then((response: any) => {
                     resolve(response.json);
